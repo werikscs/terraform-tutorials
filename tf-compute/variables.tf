@@ -47,3 +47,49 @@ variable "source_ocid" {
   description = "OCI source OCID"
   type        = string
 }
+
+variable "docker_username" {
+  description = "Username for Docker Hub"
+  type        = string
+}
+
+variable "docker_password" {
+  description = "Password for Docker Hub"
+  type        = string
+}
+
+variable "image_name" {
+  description = "Image name on Docker Hub"
+  type        = string
+}
+
+variable "image_tag_name" {
+  description = "Image tag name on Docker Hub"
+  type        = string
+}
+
+variable "instance_port" {
+  description = "Instance port"
+  type        = string
+}
+
+variable "container_port" {
+  description = "Container port"
+  type        = string
+}
+
+variable "noip_hostname" {
+  description = "No-IP hostname"
+  type        = string
+}
+
+variable "noip_username" {
+  description = "No-IP username"
+  type        = string
+}
+
+variable "noip_password" {
+  description = "No-IP password"
+  type        = string
+}
+
