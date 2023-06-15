@@ -2,6 +2,7 @@ resource "oci_core_instance" "ubuntu_instance" {
   availability_domain = data.oci_identity_availability_domains.ads.availability_domains[1].name
   compartment_id      = var.compartment_id
 
+  display_name = "ubuntu_tutorial"
   shape = "VM.Standard.E2.1.Micro"
 
   source_details {
@@ -9,7 +10,6 @@ resource "oci_core_instance" "ubuntu_instance" {
     source_type = "image"
   }
 
-  display_name = "ubuntu_tutorial"
   create_vnic_details {
     assign_public_ip = true
     subnet_id        = var.subnet_ocid
@@ -29,11 +29,11 @@ resource "oci_core_instance" "ubuntu_instance" {
       private_key = file(var.ssh_private_key_path)
     }
 
-    inline = ["[CONNECTED!]"]
+    inline = ["echo [CONNECTED!]"]
   }
 
   provisioner "local-exec" {
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i '${self.public_ip},' --user ubuntu --private-key ${var.ssh_private_key_path} ../ansible/playbook.yml"
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i '${self.public_ip},' --user ubuntu --private-key ${var.ssh_private_key_path} ../ansible/configure.ansible.yml"
 
     environment = {
       DOCKER_USERNAME       = var.docker_username
