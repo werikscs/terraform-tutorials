@@ -2,7 +2,7 @@ resource "oci_core_instance" "ubuntu_instance" {
   availability_domain = data.oci_identity_availability_domains.ads.availability_domains[1].name
   compartment_id      = var.compartment_id
 
-  display_name = "ubuntu_tutorial"
+  display_name = "ubuntu"
   shape = "VM.Standard.E2.1.Micro"
 
   source_details {
@@ -29,7 +29,7 @@ resource "oci_core_instance" "ubuntu_instance" {
       private_key = file(var.ssh_private_key_path)
     }
 
-    inline = ["echo [CONNECTED!]"]
+    inline = ["echo remote-exec provisioner conneted!"]
   }
 
   provisioner "local-exec" {
